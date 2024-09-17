@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -33,14 +35,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             HappyBirthDayTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
-                    shape = RoundedCornerShape(8.dp))
-                {
-                    GreetingImage(
-                        message = "Happy Birthday Sam!",
-                        from = "from ILAAK",
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .statusBarsPadding() // Padding for status bar
+
                     )
+                {
+                    Artcile()
                 }
             }
         }
@@ -74,10 +77,7 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthDayTheme {
-        GreetingImage(
-            message = stringResource(R.string.happy_birthday_text),
-            from = stringResource(R.string.signature_text)
-        )
+        Artcile()
 
     }
 }
@@ -101,5 +101,43 @@ fun GreetingImage(message: String, from:String, modifier :Modifier = Modifier){
         )
     }
     }
+@Composable
+fun Artcile (
+    modifier:Modifier = Modifier
+){
+    val image = painterResource(id = R.drawable.bg_compose_background)
+    Column {
+        Image(
+            painter = image,
+            contentDescription = null,
+            contentScale = ContentScale.FillWidth,
+            )
+        Text(
+            text = stringResource(R.string.article_title),
+            fontSize = 26.sp,
+            modifier = Modifier
+                .padding(16.dp)
+        )
+        Text(
+            text = stringResource(R.string.article_subtitle),
+            textAlign = TextAlign.Justify,
+            modifier = Modifier
+                .padding(
+                    start =16.dp,
+                    end = 16.dp,
+                )
+        )
+        Text(
+            text = stringResource(R.string.Article_Text),
+            textAlign = TextAlign.Justify,
+            modifier = Modifier
+                .padding(
+                    start =16.dp,
+                    end = 16.dp,
+                )
+        )
+    }
+
+}
 
 
